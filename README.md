@@ -60,7 +60,17 @@ Django: Full ────────────> REST API + WebSocket
 
 ### 🟡 Go Track
 
-Coming soon...
+```
+Level 1: Gin Basic ────────> Templates + Static Pages
+    │
+    ▼
+Level 2: Gin API ──────────> RESTful API
+    │
+    ▼
+Level 3: Gin Advanced ─────> GORM + JWT + WebSocket
+```
+
+[Start Go Track →](./tech-tree/go-track/)
 
 ## 📦 Standalone Modules (Mix & Match)
 
@@ -188,7 +198,17 @@ Django 完整 ───────────> REST API + WebSocket
 
 ### 🟡 Go 路线
 
-即将推出...
+```
+Level 1: Gin 基础 ────────> 模板渲染 + 静态页面
+    │
+    ▼
+Level 2: Gin API ─────────> RESTful API
+    │
+    ▼
+Level 3: Gin 高级 ────────> GORM + JWT + WebSocket
+```
+
+[开始 Go 路线 →](./tech-tree/go-track/)
 
 ## 📦 独立功能模块（自由组合）
 
