@@ -87,6 +87,19 @@ After completing the basics, add features like building blocks:
 | [Module 07](./modules/module-07-websocket) | Real-time Notifications | ⭐⭐⭐ |
 | [Module 08](./modules/module-08-image) | Image Upload | ⭐⭐ |
 
+## 🎮 Interactive Playground
+
+**Learn by doing!** Open `playground/index.html` in your browser:
+
+- 10 progressive challenges
+- Built-in code editor + live preview
+- Auto-save progress
+- Export your finished project as ZIP
+
+[Start Playground →](./playground/)
+
+---
+
 ## 🚀 Quick Start
 
 ### Option 1: Ready-to-Use Templates
@@ -224,6 +237,19 @@ Level 3: Gin 高级 ────────> GORM + JWT + WebSocket
 | [Module 06](./modules/module-06-follow) | 关注/粉丝 | ⭐⭐⭐ |
 | [Module 07](./modules/module-07-websocket) | 实时通知 | ⭐⭐⭐ |
 | [Module 08](./modules/module-08-image) | 图片上传 | ⭐⭐ |
+
+## 🎮 交互式练习平台
+
+**边学边练！** 浏览器打开 `playground/index.html`：
+
+- 10 个渐进式关卡
+- 内置代码编辑器 + 实时预览
+- 自动保存进度
+- 一键导出成品 ZIP
+
+[开始练习 →](./playground/)
+
+---
 
 ## 🚀 快速启动
 

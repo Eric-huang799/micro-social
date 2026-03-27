@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Micro Social Playground</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- CodeMirror -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/dracula.min.css">
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <header class="topbar">
+        <div class="topbar-left">
+            <span class="logo">🌐 Micro Social Playground</span>
+        </div>
+        <div class="topbar-center">
+            <div class="challenge-nav">
+                <button id="prev-btn" class="nav-btn" onclick="prevChallenge()">◀</button>
+                <span id="challenge-indicator">1 / 10</span>
+                <button id="next-btn" class="nav-btn" onclick="nextChallenge()">▶</button>
+            </div>
+        </div>
+        <div class="topbar-right">
+            <span id="progress-text">进度: 0%</span>
+            <div class="progress-bar">
+                <div id="progress-fill" class="progress-fill"></div>
+            </div>
+            <button class="reset-btn" onclick="resetChallenge()">🔄 重置</button>
+            <button class="export-btn" onclick="exportProject()">📦 导出成品</button>
+        </div>
+    </header>
+
+    <div class="main-layout">
+        <!-- 左侧：关卡说明 -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-toggle" onclick="toggleSidebar()">☰</div>
+            
+            <div class="challenge-info">
+                <div class="challenge-badge" id="challenge-badge">Level 1</div>
+                <h2 id="challenge-title">加载中...</h2>
+                <div class="difficulty" id="challenge-difficulty">
+                    <span>难度：</span>
+                    <span class="stars">⭐</span>
+                </div>
+            </div>
+
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('desc')">📖 说明</button>
+                <button class="tab" onclick="switchTab('hints')">💡 提示</button>
+                <button class="tab" onclick="switchTab('checklist')">✅ 检查</button>
+            </div>
+
+            <div class="tab-content" id="tab-desc">
+                <div id="challenge-desc">加载中...</div>
+            </div>
+            <div class="tab-content hidden" id="tab-hints">
+                <div id="challenge-hints">加载中...</div>
+            </div>
+            <div class="tab-content hidden" id="tab-checklist">
+                <div id="challenge-checklist">加载中...</div>
+            </div>
+
+            <!-- 关卡列表 -->
+            <div class="challenge-list">
+                <h3>🗺️ 全部关卡</h3>
+                <ul id="challenge-list-items"></ul>
+            </div>
+        </aside>
+
+        <!-- 中间：代码编辑器 -->
+        <div class="editor-panel">
+            <div class="editor-tabs">
+                <button class="editor-tab active" id="tab-html" onclick="switchFile('html')">index.html</button>
+                <button class="editor-tab" id="tab-css" onclick="switchFile('css')">style.css</button>
+                <button class="editor-tab" id="tab-js" onclick="switchFile('js')">script.js</button>
+            </div>
+            <div class="editor-container">
+                <textarea id="code-editor"></textarea>
+            </div>
+            <div class="editor-footer">
+                <button class="run-btn" onclick="runCode()">▶ 运行</button>
+                <button class="check-btn" onclick="checkChallenge()">✅ 检查答案</button>
+                <span id="status-msg" class="status-msg"></span>
+            </div>
+        </div>
+
+        <!-- 右侧：预览 -->
+        <div class="preview-panel">
+            <div class="preview-header">
+                <span>👁️ 实时预览</span>
+                <div class="preview-controls">
+                    <button class="preview-size-btn" onclick="setPreviewSize('mobile')" title="手机视图">📱</button>
+                    <button class="preview-size-btn active" onclick="setPreviewSize('desktop')" title="桌面视图">🖥️</button>
+                </div>
+            </div>
+            <div class="preview-container" id="preview-container">
+                <iframe id="preview-frame" sandbox="allow-scripts allow-same-origin"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- 通关弹窗 -->
+    <div class="modal hidden" id="success-modal">
+        <div class="modal-content">
+            <div class="modal-icon">🎉</div>
+            <h2 id="modal-title">恭喜通关！</h2>
+            <p id="modal-message">你已经完成了这个关卡！</p>
+            <div class="modal-actions">
+                <button class="modal-btn secondary" onclick="closeModal()">继续完善</button>
+                <button class="modal-btn primary" onclick="goNextChallenge()">下一关 ▶</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 最终成品弹窗 -->
+    <div class="modal hidden" id="export-modal">
+        <div class="modal-content wide">
+            <div class="modal-icon">📦</div>
+            <h2>导出你的成品</h2>
+            <p>你的社交平台代码已经打包好了！</p>
+            <div class="export-preview">
+                <pre id="export-code"></pre>
+            </div>
+            <div class="modal-actions">
+                <button class="modal-btn secondary" onclick="closeExportModal()">关闭</button>
+                <button class="modal-btn primary" onclick="downloadProject()">⬇️ 下载 ZIP</button>
+                <button class="modal-btn primary" onclick="copyCode()">📋 复制代码</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/htmlmixed/htmlmixed.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/css/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="js/challenges.js"></script>
+    <script src="js/editor.js"></script>
+</body>
+</html>

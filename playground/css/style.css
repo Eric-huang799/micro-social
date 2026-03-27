@@ -1,0 +1,546 @@
+/* ========== 全局样式 ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #0d1117;
+    color: #c9d1d9;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* ========== 顶部导航 ========== */
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 48px;
+    padding: 0 16px;
+    background: #161b22;
+    border-bottom: 1px solid #30363d;
+}
+
+.topbar-left .logo {
+    font-size: 16px;
+    font-weight: 700;
+    color: #f0f6fc;
+}
+
+.topbar-center {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.challenge-nav {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.nav-btn {
+    background: #21262d;
+    border: 1px solid #30363d;
+    color: #c9d1d9;
+    padding: 4px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.nav-btn:hover {
+    background: #30363d;
+    border-color: #8b949e;
+}
+
+#challenge-indicator {
+    font-size: 14px;
+    color: #8b949e;
+    min-width: 60px;
+    text-align: center;
+}
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+#progress-text {
+    font-size: 12px;
+    color: #8b949e;
+}
+
+.progress-bar {
+    width: 120px;
+    height: 6px;
+    background: #21262d;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #238636, #2ea043);
+    border-radius: 3px;
+    width: 0%;
+    transition: width 0.5s ease;
+}
+
+.reset-btn, .export-btn {
+    background: #21262d;
+    border: 1px solid #30363d;
+    color: #c9d1d9;
+    padding: 4px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.2s;
+}
+
+.reset-btn:hover { background: #da3633; border-color: #da3633; color: #fff; }
+.export-btn:hover { background: #238636; border-color: #238636; color: #fff; }
+
+/* ========== 主布局 ========== */
+.main-layout {
+    display: flex;
+    height: calc(100vh - 48px);
+}
+
+/* ========== 左侧边栏 ========== */
+.sidebar {
+    width: 320px;
+    min-width: 320px;
+    background: #161b22;
+    border-right: 1px solid #30363d;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    transition: width 0.3s, min-width 0.3s;
+}
+
+.sidebar.collapsed {
+    width: 0;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.sidebar-toggle {
+    display: none;
+    position: absolute;
+    left: 8px;
+    top: 56px;
+    z-index: 10;
+    background: #21262d;
+    border: 1px solid #30363d;
+    color: #c9d1d9;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.challenge-info {
+    padding: 20px 16px 12px;
+    border-bottom: 1px solid #30363d;
+}
+
+.challenge-badge {
+    display: inline-block;
+    background: #1f6feb;
+    color: #fff;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.challenge-info h2 {
+    font-size: 18px;
+    color: #f0f6fc;
+    margin-bottom: 4px;
+}
+
+.difficulty {
+    font-size: 13px;
+    color: #8b949e;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    border-bottom: 1px solid #30363d;
+    padding: 0 8px;
+}
+
+.tab {
+    flex: 1;
+    background: none;
+    border: none;
+    color: #8b949e;
+    padding: 10px 8px;
+    font-size: 13px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+}
+
+.tab:hover { color: #c9d1d9; }
+.tab.active { color: #58a6ff; border-bottom-color: #58a6ff; }
+
+.tab-content {
+    padding: 16px;
+    font-size: 14px;
+    line-height: 1.7;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.tab-content.hidden { display: none; }
+
+.tab-content h3 {
+    color: #f0f6fc;
+    margin: 12px 0 8px;
+    font-size: 15px;
+}
+
+.tab-content code {
+    background: #21262d;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: "Fira Code", monospace;
+    font-size: 13px;
+    color: #79c0ff;
+}
+
+.tab-content pre {
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    padding: 12px;
+    overflow-x: auto;
+    margin: 8px 0;
+    font-size: 13px;
+}
+
+.tab-content ul, .tab-content ol {
+    padding-left: 20px;
+    margin: 8px 0;
+}
+
+.tab-content li {
+    margin: 4px 0;
+}
+
+/* 关卡列表 */
+.challenge-list {
+    padding: 16px;
+    border-top: 1px solid #30363d;
+}
+
+.challenge-list h3 {
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #f0f6fc;
+}
+
+.challenge-list ul {
+    list-style: none;
+}
+
+.challenge-list li {
+    padding: 8px 12px;
+    margin: 2px 0;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.challenge-list li:hover { background: #21262d; }
+.challenge-list li.active { background: #1f6feb33; color: #58a6ff; }
+.challenge-list li.completed { color: #3fb950; }
+
+.challenge-list .status-icon {
+    font-size: 14px;
+    width: 20px;
+    text-align: center;
+}
+
+/* ========== 编辑器面板 ========== */
+.editor-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    border-right: 1px solid #30363d;
+}
+
+.editor-tabs {
+    display: flex;
+    background: #161b22;
+    border-bottom: 1px solid #30363d;
+    padding: 0 8px;
+}
+
+.editor-tab {
+    background: none;
+    border: none;
+    color: #8b949e;
+    padding: 10px 16px;
+    font-size: 13px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+}
+
+.editor-tab:hover { color: #c9d1d9; }
+.editor-tab.active { color: #f0f6fc; border-bottom-color: #58a6ff; background: #0d1117; }
+
+.editor-container {
+    flex: 1;
+    overflow: hidden;
+}
+
+.CodeMirror {
+    height: 100% !important;
+    font-size: 14px;
+    font-family: "Fira Code", "Cascadia Code", "Consolas", monospace;
+}
+
+.editor-footer {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    gap: 8px;
+    background: #161b22;
+    border-top: 1px solid #30363d;
+}
+
+.run-btn {
+    background: #238636;
+    border: none;
+    color: #fff;
+    padding: 6px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.run-btn:hover { background: #2ea043; }
+
+.check-btn {
+    background: #1f6feb;
+    border: none;
+    color: #fff;
+    padding: 6px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.check-btn:hover { background: #388bfd; }
+
+.status-msg {
+    font-size: 13px;
+    margin-left: 8px;
+}
+
+.status-msg.success { color: #3fb950; }
+.status-msg.error { color: #f85149; }
+.status-msg.info { color: #58a6ff; }
+
+/* ========== 预览面板 ========== */
+.preview-panel {
+    width: 40%;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+.preview-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
+    background: #161b22;
+    border-bottom: 1px solid #30363d;
+    font-size: 13px;
+    color: #8b949e;
+}
+
+.preview-controls {
+    display: flex;
+    gap: 4px;
+}
+
+.preview-size-btn {
+    background: none;
+    border: 1px solid #30363d;
+    border-radius: 4px;
+    padding: 2px 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.preview-size-btn:hover { background: #21262d; }
+.preview-size-btn.active { background: #21262d; border-color: #58a6ff; }
+
+.preview-container {
+    flex: 1;
+    background: #fff;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.preview-container.mobile {
+    padding: 16px;
+    background: #0d1117;
+}
+
+.preview-container.mobile iframe {
+    max-width: 375px;
+    border-radius: 12px;
+    border: 3px solid #30363d;
+}
+
+#preview-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: #fff;
+}
+
+/* ========== 弹窗 ========== */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    backdrop-filter: blur(4px);
+}
+
+.modal.hidden { display: none; }
+
+.modal-content {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 12px;
+    padding: 32px;
+    max-width: 480px;
+    width: 90%;
+    text-align: center;
+}
+
+.modal-content.wide {
+    max-width: 720px;
+}
+
+.modal-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.modal-content h2 {
+    font-size: 20px;
+    color: #f0f6fc;
+    margin-bottom: 8px;
+}
+
+.modal-content p {
+    color: #8b949e;
+    margin-bottom: 20px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.modal-btn {
+    padding: 8px 20px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.modal-btn.primary { background: #238636; color: #fff; }
+.modal-btn.primary:hover { background: #2ea043; }
+.modal-btn.secondary { background: #21262d; color: #c9d1d9; border: 1px solid #30363d; }
+.modal-btn.secondary:hover { background: #30363d; }
+
+.export-preview {
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px 0;
+    text-align: left;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.export-preview pre {
+    font-size: 12px;
+    font-family: monospace;
+    white-space: pre-wrap;
+    color: #c9d1d9;
+}
+
+/* ========== Checklist ========== */
+.checklist-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 0;
+    border-bottom: 1px solid #21262d;
+}
+
+.checklist-icon {
+    font-size: 16px;
+    width: 24px;
+    text-align: center;
+}
+
+.checklist-item.passed .checklist-icon { color: #3fb950; }
+.checklist-item.failed .checklist-icon { color: #8b949e; }
+
+/* ========== 响应式 ========== */
+@media (max-width: 1024px) {
+    .sidebar {
+        position: absolute;
+        z-index: 50;
+        height: calc(100vh - 48px);
+    }
+    .sidebar-toggle { display: block; }
+    .preview-panel { width: 35%; min-width: 250px; }
+}
+
+@media (max-width: 768px) {
+    .preview-panel { display: none; }
+    .topbar-right .progress-bar { display: none; }
+}
